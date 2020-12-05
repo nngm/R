@@ -1,0 +1,26 @@
+zbitest=function(smean1,smean2,psd1,psd2,n1,n2,alpha) {
+    rlen=2
+    z0=(smean1-smean2)/sqrt(psd1^2/n1+psd2^2/n2)
+    z=qnorm(1-(alpha/2))
+    if (abs(z0)<z) conclusion="accept H0" else conclusion = "reject H0"
+    p.value=(1-pnorm(abs(z0)))*2
+    test=c(smean1,smean2,psd1^2,psd2^2,n1,n2,round(z0,rlen),round(z,rlen),round(p.value,rlen), conclusion)
+    name=c("samplem ean 1", "sample mean 2","pop var 1", "pop var 2", "samp sz 1", "samp sz 2", "test statistics", "critical value", "p-value", "conclusion")
+    data.frame(section=name, value=test)
+}
+
+# x=c(66.4, 61.6, 60.5, 59.1, 63.6, 61.4, 62.5, 64.4, 60.7, 58.1)
+# y=c(58.2, 60.4, 55.2, 62.0, 57.3, 58.7, 56.1, 63.3)
+sz1 = 10
+sz2 = 10
+mn1 = 65.6
+mn2 = 70.4
+sd1 = sqrt(5.4)
+sd2 = sqrt(4.8)
+
+zbitest(mn1, mn2, sd1, sd2, sz1, sz2, 0.05)
+
+x=c(124, 134, 136, 125, 133, 127, 135, 131, 133, 125, 118)
+y=c(130, 122, 128, 129, 118, 122, 116, 127, 135, 120, 122, 120, 115, 123)
+t.test(x,y, alt="g", var.equal=T)
+
