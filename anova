@@ -1,0 +1,13 @@
+# x = c(201,171,98,25)
+# # p0 = rep(1/length(x), length(x))
+# p0 = c(0.38, 0.32, 0.26, 0.04)
+# chisq.test(x, p=p0)
+
+x=c(220,251,226,246,260)
+y=c(244,235,232,242,225)
+z=c(252,272,250,238,256)
+data=c(x,y,z)
+n=length(x)
+class=c(rep(1,n), rep(2,n), rep(3,n))
+fac=factor(class, levels=1:3)
+anova(lm(data~fac))
